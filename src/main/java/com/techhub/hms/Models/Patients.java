@@ -15,7 +15,5 @@ public class Patients {
 	private String wpnumber;
 	private String mobailenumber;
 	
-	
-	
 
 }
