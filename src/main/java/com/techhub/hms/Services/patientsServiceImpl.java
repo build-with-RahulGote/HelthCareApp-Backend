@@ -21,5 +21,15 @@ public class patientsServiceImpl  implements patientsService{
 	
 		return patientsRepo.getAllPatients();
 	}
+	@Override
+	public boolean updatePatientById(int id, Patients patients) {
+		
+		return patientsRepo.updatePatientById(id, patients);
+	}
+	@Override
+	public List<Patients> searchPatientsByName(String patients_name) {
+		
+		return patientsRepo.searchPatientsByName(patients_name);
+	}
 
 }

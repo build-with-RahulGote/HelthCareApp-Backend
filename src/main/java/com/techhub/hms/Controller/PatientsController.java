@@ -3,8 +3,11 @@ package com.techhub.hms.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,5 +51,28 @@ public class PatientsController {
 			}
 		
 	}
+	
+	
+	@PutMapping("update/{id}")
+    public String updatepatients(@PathVariable int id,@RequestBody Patients patient)
+    {
+   	 boolean isupdate=patientsserv.updatePatientById(id, patient);
+		return isupdate?"Patient updated successfully!" : "Patient update failed!";
+   	 
+    }
+	
+	@GetMapping("searchpatientsByName/{patients}")
+	public ResponseEntity<List<Patients>> searchEmployeeByName(@PathVariable("patients") String patients) {
+	 System.out.println("Patient name:"+""+patients);
+	    List<Patients> list = patientsserv.searchPatientsByName(patients);
+
+	    if (!list.isEmpty()) {
+	        return ResponseEntity.ok(list);
+	    } else {
+	        throw new patientsNotFoundException("Patient with name '" + patients + "' not found in the database.");
+	    }
+	}
+	 
+
 	 
 }

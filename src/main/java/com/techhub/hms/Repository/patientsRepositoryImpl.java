@@ -70,4 +70,57 @@ public class patientsRepositoryImpl implements patientsRepository{
 	 return  list;
 	}
 
+
+	@Override
+	public boolean updatePatientById(int id, Patients patients) {
+		
+		int value =jdbctemplate.update("UPDATE Patients SET Name = ?, Dob = ?,gender = ?, Maritalstaus = ?, email = ?, " +
+                " mobailenumber = ?, wpnumber = ?,address = ? WHERE patient_id = ?",new PreparedStatementSetter() {
+
+					@Override
+					public void setValues(PreparedStatement ps) throws SQLException {
+						ps.setString(1, patients.getName());
+		                ps.setDate(2, patients.getDob());  
+		                ps.setString(3, patients.getGender());
+		                ps.setString(4, patients.getMaritalstatus());  
+		                ps.setString(5, patients.getEmail());
+		                ps.setString(6, patients.getMobailenumber()); 
+		                ps.setString(7, patients.getWpnumber());
+		                ps.setString(8, patients.getAddress());
+		                ps.setInt(9, id);
+
+					}
+					
+		});
+		
+		
+		return value>0?true:false;
+
+		
+	}
+
+
+	@Override
+	public List<Patients> searchPatientsByName(String patients_name) {
+		String sql="select  * from Patients where Name LIKE ?";
+		
+		return jdbctemplate.query(sql,new Object[] {"%"+patients_name+"%"},new RowMapper<Patients>() {
+
+			@Override
+			public Patients mapRow(ResultSet rs, int rowNum) throws SQLException {
+				
+				 Patients patient = new Patients();
+		            patient.setPatientId(rs.getInt("patient_id"));
+		            patient.setName(rs.getString("Name"));
+		            patient.setDob(rs.getDate("Dob"));
+		            patient.setGender(rs.getString("gender"));
+		            patient.setMaritalstatus(rs.getString("Maritalstaus"));
+		            patient.setEmail(rs.getString("email"));
+		            patient.setMobailenumber(rs.getString("mobailenumber")); 
+		            patient.setWpnumber(rs.getString("wpnumber"));
+		            patient.setAddress(rs.getString("Address"));
+		            return patient;
+			}});
+	}
+
 }
