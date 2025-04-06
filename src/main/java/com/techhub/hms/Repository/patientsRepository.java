@@ -9,5 +9,6 @@ public interface patientsRepository {
 	public List<Patients> getAllPatients();
 	public boolean updatePatientById(int id, Patients patients);
 	public List<Patients> searchPatientsByName(String patients_name);
+	public boolean isDeletePatients(int id);
 
 }

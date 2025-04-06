@@ -31,5 +31,10 @@ public class patientsServiceImpl  implements patientsService{
 		
 		return patientsRepo.searchPatientsByName(patients_name);
 	}
+	@Override
+	public boolean isDeletePatients(int id) {
+		
+		return patientsRepo.isDeletePatients(id);
+	}
 
 }
