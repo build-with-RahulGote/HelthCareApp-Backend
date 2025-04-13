@@ -119,4 +119,13 @@ public class patientsRepositoryImpl implements patientsRepository{
 		            return patient;
 			}});
 	}
+
+	@Override
+	public boolean isDeletePatients(int id) {
+		String sql="delete from Patients where patient_id =?";
+		int value=jdbctemplate.update(sql, id);
+		return value>0?true:false;
+	}
+
+
 }

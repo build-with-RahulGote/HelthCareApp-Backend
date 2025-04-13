@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.techhub.hms.Exception.patientsNotFoundException;
 import com.techhub.hms.Models.Patients;
 import com.techhub.hms.Services.patientsService;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 01ba04587ac23da9d372447464974e12f9a01a12
 @CrossOrigin(origins="http://localhost:5173")
 @RestController
 @RequestMapping("/hms")
@@ -77,6 +80,19 @@ public class PatientsController {
 	    }
 	}
 	 
-
+	@GetMapping("/deleteById/{id}")
+	public String deleteEmployeeByid(@PathVariable("id") Integer id )
+	{
+		boolean b=patientsserv.isDeletePatients(id);
+		if(b)
+		{
+			return "Patients Deleted";
+		}
+		else
+		{
+			throw new patientsNotFoundException("Patient not Found using:"+" "+id);
+		}
+		
+	}
 	 
 }
