@@ -27,7 +27,7 @@ public class patientsRepositoryImpl implements patientsRepository{
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
 				ps.setString(1,patiets.getName());
-				ps.setDate(2, patiets.getDob());
+				ps.setDate(2, new java.sql.Date(patiets.getDob().getTime()));
 				ps.setString(3,patiets.getGender());
 				ps.setString(4,patiets.getMaritalstatus());
 				ps.setString(5,patiets.getEmail());
@@ -46,21 +46,21 @@ public class patientsRepositoryImpl implements patientsRepository{
 
 	@Override
 	public List<Patients> getAllPatients() {
-		List<Patients>list=jdbctemplate.query("select * from Patients", new RowMapper() {
+		List<Patients>list=jdbctemplate.query("select * from patients", new RowMapper() {
 
 			@Override
 			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Patients pmp=new Patients();
-			pmp.setPatientId(rs.getInt("patient_id"));
-			pmp.setName(rs.getString("name"));
-			pmp.setGender(rs.getString("gender"));
-			pmp.setDob(rs.getDate("dob"));
-			pmp.setMaritalstatus(rs.getString("Maritalstaus"));
-			pmp.setAddress(rs.getString("address"));
-			pmp.setEmail(rs.getString("email"));
-			pmp.setWpnumber(rs.getString("wpnumber"));
-			pmp.setMobailenumber(rs.getString("mobailenumber"));
-			return pmp;
+				Patients pmp=new Patients();
+				pmp.setPatientId(rs.getInt("patient_id"));
+				pmp.setName(rs.getString("Name"));
+				pmp.setDob(rs.getDate("Dob"));
+				pmp.setGender(rs.getString("gender"));
+				pmp.setMaritalstatus(rs.getString("Maritalstaus"));
+				pmp.setEmail(rs.getString("Email"));
+				pmp.setMobailenumber(rs.getString("mobailenumber"));
+				pmp.setWpnumber(rs.getString("wpnumber"));
+				pmp.setAddress(rs.getString("Adress"));
+				return pmp;
 				
 			}
 			   
@@ -71,36 +71,33 @@ public class patientsRepositoryImpl implements patientsRepository{
 	}
 
 
-	@Override
 	public boolean updatePatientById(int id, Patients patients) {
-		
-		int value =jdbctemplate.update("UPDATE Patients SET Name = ?, Dob = ?,gender = ?, Maritalstaus = ?, email = ?, " +
-                " mobailenumber = ?, wpnumber = ?,address = ? WHERE patient_id = ?",new PreparedStatementSetter() {
+	    int value = jdbctemplate.update(
+	    		"UPDATE Patients SET Name = ?, Dob = ?, gender = ?, Maritalstaus = ?, email = ?,mobailenumber = ?, wpnumber = ?, Adress = ? WHERE patient_id = ?",
 
-					@Override
-					public void setValues(PreparedStatement ps) throws SQLException {
-						ps.setString(1, patients.getName());
-		                ps.setDate(2, patients.getDob());  
-		                ps.setString(3, patients.getGender());
-		                ps.setString(4, patients.getMaritalstatus());  
-		                ps.setString(5, patients.getEmail());
-		                ps.setString(6, patients.getMobailenumber()); 
-		                ps.setString(7, patients.getWpnumber());
-		                ps.setString(8, patients.getAddress());
-		                ps.setInt(9, id);
+	        new PreparedStatementSetter() {
+	            @Override
+	            public void setValues(PreparedStatement ps) throws SQLException {
+	                ps.setString(1, patients.getName());
+	                ps.setDate(2, new java.sql.Date(patients.getDob().getTime()));
+	                ps.setString(3, patients.getGender());
+	                ps.setString(4, patients.getMaritalstatus());
+	                ps.setString(5, patients.getEmail());
+	                ps.setString(6, patients.getMobailenumber());
+	                ps.setString(7, patients.getWpnumber());
+	                ps.setString(8, patients.getAddress());
+	                ps.setInt(9, id);
+ 					}
+ 					
+ 		});
+ 		
+ 		
+ 		return value>0?true:false;
+ 
+ 		
+ 	}
 
-					}
-					
-		});
-		
-		
-		return value>0?true:false;
-
-		
-	}
-
-
-	@Override
+@Override
 	public List<Patients> searchPatientsByName(String patients_name) {
 		String sql="select  * from Patients where Name LIKE ?";
 		
@@ -118,11 +115,10 @@ public class patientsRepositoryImpl implements patientsRepository{
 		            patient.setEmail(rs.getString("email"));
 		            patient.setMobailenumber(rs.getString("mobailenumber")); 
 		            patient.setWpnumber(rs.getString("wpnumber"));
-		            patient.setAddress(rs.getString("Address"));
+		            patient.setAddress(rs.getString("Adress"));
 		            return patient;
 			}});
 	}
-
 
 	@Override
 	public boolean isDeletePatients(int id) {
@@ -130,5 +126,6 @@ public class patientsRepositoryImpl implements patientsRepository{
 		int value=jdbctemplate.update(sql, id);
 		return value>0?true:false;
 	}
+
 
 }
