@@ -61,5 +61,20 @@ public class DoctorController {
 		return isupdate?"Doctor updated successfully!" : "Doctor update failed!";
    	 
     }
+	
+	
+	@GetMapping("/deletedoctor/{id}")
+	public String deleteDoctorByid(@PathVariable("id") Integer id )
+	{
+		boolean b=doctorserv.isdelete(id);
+		if(b)
+		{
+			return "Doctor Deleted";
+		}
+		else
+		{
+			throw new patientsNotFoundException("Patient not Found using:"+" "+id);
+		}
+	}
 
 }

@@ -59,7 +59,7 @@ public class patientsRepositoryImpl implements patientsRepository{
 				pmp.setEmail(rs.getString("Email"));
 				pmp.setMobailenumber(rs.getString("mobailenumber"));
 				pmp.setWpnumber(rs.getString("wpnumber"));
-				pmp.setAddress(rs.getString("Adress"));
+				pmp.setAddress(rs.getString("Address"));
 				return pmp;
 				
 			}
@@ -73,7 +73,7 @@ public class patientsRepositoryImpl implements patientsRepository{
 
 	public boolean updatePatientById(int id, Patients patients) {
 	    int value = jdbctemplate.update(
-	    		"UPDATE Patients SET Name = ?, Dob = ?, gender = ?, Maritalstaus = ?, email = ?,mobailenumber = ?, wpnumber = ?, Adress = ? WHERE patient_id = ?",
+	    		"UPDATE Patients SET Name = ?, Dob = ?, gender = ?, Maritalstaus = ?, email = ?,mobailenumber = ?, wpnumber = ?, Address = ? WHERE patient_id = ?",
 
 	        new PreparedStatementSetter() {
 	            @Override
@@ -115,7 +115,7 @@ public class patientsRepositoryImpl implements patientsRepository{
 		            patient.setEmail(rs.getString("email"));
 		            patient.setMobailenumber(rs.getString("mobailenumber")); 
 		            patient.setWpnumber(rs.getString("wpnumber"));
-		            patient.setAddress(rs.getString("Adress"));
+		            patient.setAddress(rs.getString("Address"));
 		            return patient;
 			}});
 	}

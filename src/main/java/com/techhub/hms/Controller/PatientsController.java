@@ -10,19 +10,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techhub.hms.Exception.patientsNotFoundException;
 import com.techhub.hms.Models.Patients;
 import com.techhub.hms.Services.patientsService;
-<<<<<<< HEAD
-
-=======
->>>>>>> 01ba04587ac23da9d372447464974e12f9a01a12
 @CrossOrigin(origins="http://localhost:5173")
 @RestController
-@RequestMapping("/hms")
+
 public class PatientsController {
 	
 	@Autowired

@@ -84,6 +84,14 @@ public class DoctorRepositoryImpl implements DoctorRepository{
 
 		
 	}
+
+	@Override
+	public boolean isdelete(int id) {
+		
+		String sql="delete from doctors where doctor_id =?";
+		int value=jdbcTemplate.update(sql, id);
+		return value>0?true:false;
+	}
 		
 
 }
