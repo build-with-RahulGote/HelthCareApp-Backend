@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -95,6 +98,17 @@ public class ReceptionistRepositoryimp implements ReceptionistRepository{
 	public boolean isdeletesReceptionist(int id) {
 		int value=jdbcTemplate.update("delete from Receptionist where receptionisted_id="+id);
 		return value>0?true:false;
+	}
+
+	@Override
+	public Optional<Map<String, Object>> findByUsernameAndPassword(String username, String password) {
+		  String sql = "SELECT * FROM receptionist WHERE UserName = ? AND password = ?";
+		  try {
+	            Map<String, Object> receptionist = jdbcTemplate.queryForMap(sql, username, password);
+	            return Optional.of(receptionist);
+	        } catch (EmptyResultDataAccessException e) {
+	            return Optional.empty();
+	        }
 	}
 
 

@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -125,6 +128,19 @@ public class patientsRepositoryImpl implements patientsRepository{
 		String sql="delete from Patients where patient_id =?";
 		int value=jdbctemplate.update(sql, id);
 		return value>0?true:false;
+	}
+
+
+	@Override
+	public Optional<Map<String, Object>> findByNameAndMobile(String name, String mobile) {
+		
+		String sql = "SELECT * FROM Patients WHERE Name = ? AND mobailenumber = ?";
+        try {
+            Map<String, Object> patient = jdbctemplate.queryForMap(sql, name, mobile);
+            return Optional.of(patient);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
 	}
 
 
