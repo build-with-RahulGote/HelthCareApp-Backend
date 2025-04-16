@@ -3,6 +3,7 @@ package com.techhub.hms.Repository;
 import java.util.List;
 
 import com.techhub.hms.Models.Patients;
+import com.techhub.hms.Models.Pharmacy;
 
 public interface patientsRepository {
 	public boolean isPatientsAdd(Patients patiets);
@@ -10,5 +11,6 @@ public interface patientsRepository {
 	public boolean updatePatientById(int id, Patients patients);
 	public List<Patients> searchPatientsByName(String patients_name);
 	public boolean isDeletePatients(int id);
+	
 
 }

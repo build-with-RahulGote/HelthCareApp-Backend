@@ -25,6 +25,7 @@ import com.techhub.hms.Services.ReceptionistService;
 public class ReceptionistrepControler {
 	@Autowired
 	ReceptionistService receptionists;
+
 	@PostMapping("/AddReceptionist")
 	public String CreateReceptionistService(@RequestBody Receptionist receptionist) {
 		boolean b=receptionists.isReceptionistAdd(receptionist);
@@ -65,6 +66,7 @@ public class ReceptionistrepControler {
 	        throw new patientsNotFoundException("Patient with name '" + Receptionist + "' not found in the database.");
 	    }
 	}
+
 	@DeleteMapping("/DeleteReceptionis/{id}")
 	public String DeleteReceptionist(@PathVariable("id")int id) {
 		boolean b=receptionists.isdeleteReceptionist(id);
@@ -76,6 +78,7 @@ public class ReceptionistrepControler {
 		}
 		
 	}
+	
 
 
 }

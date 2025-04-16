@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.techhub.hms.Models.Patients;
+import com.techhub.hms.Models.Pharmacy;
 @Repository
 public class patientsRepositoryImpl implements patientsRepository{
 	@Autowired
@@ -126,6 +127,8 @@ public class patientsRepositoryImpl implements patientsRepository{
 		int value=jdbctemplate.update(sql, id);
 		return value>0?true:false;
 	}
+
+
 
 
 }
