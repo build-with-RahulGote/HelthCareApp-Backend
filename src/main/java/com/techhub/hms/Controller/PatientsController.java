@@ -65,7 +65,7 @@ public class PatientsController {
     }
 	
 	@GetMapping("searchpatientsByName/{patients}")
-	public ResponseEntity<List<Patients>> searchEmployeeByName(@PathVariable("patients") String patients) {
+	public ResponseEntity<List<Patients>> searchPatientsByName(@PathVariable("patients") String patients) {
 	 System.out.println("Patient name:"+""+patients);
 	    List<Patients> list = patientsserv.searchPatientsByName(patients);
 
@@ -77,7 +77,7 @@ public class PatientsController {
 	}
 	 
 	@GetMapping("/deleteById/{id}")
-	public String deleteEmployeeByid(@PathVariable("id") Integer id )
+	public String deletePatientsByid(@PathVariable("id") Integer id )
 	{
 		boolean b=patientsserv.isDeletePatients(id);
 		if(b)
