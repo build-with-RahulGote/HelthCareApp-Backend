@@ -1,5 +1,7 @@
 package com.techhub.hms.Controller;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.techhub.hms.Exception.patientsNotFoundException;
 import com.techhub.hms.Models.Patients;
 import com.techhub.hms.Services.patientsService;
+
 @CrossOrigin(origins="http://localhost:5173")
 @RestController
 
@@ -24,9 +27,8 @@ public class PatientsController {
 	@Autowired
 	patientsService patientsserv;
 
-	
-	@PostMapping("/createPatients")
 
+	@PostMapping("/createPatients")
 	public String createPatients(@RequestBody Patients patients)
 	{
 		boolean b=patientsserv.isPatientsAdd(patients);
@@ -75,7 +77,7 @@ public class PatientsController {
 	        throw new patientsNotFoundException("Patient with name '" + patients + "' not found in the database.");
 	    }
 	}
-	 
+	
 	@GetMapping("/deleteById/{id}")
 	public String deletePatientsByid(@PathVariable("id") Integer id )
 	{

@@ -84,8 +84,6 @@ public class DoctorRepositoryImpl implements DoctorRepository{
 		
 		
 		return value>0?true:false;
-
-		
 	}
 
 	@Override

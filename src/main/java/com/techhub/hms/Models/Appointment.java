@@ -7,6 +7,7 @@ import lombok.Data;
 public class Appointment {
 private int appointment_id;
 private int patient_id;
+private int doctor_id;
 private Date Appointment_date;
 private String time;
 private String Status;
