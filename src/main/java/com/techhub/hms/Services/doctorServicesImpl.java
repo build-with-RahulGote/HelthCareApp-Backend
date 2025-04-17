@@ -31,6 +31,12 @@ public class doctorServicesImpl  implements doctorServices {
 		return doctorRepo.isupdate(id, doctor);
 	}
 
+	@Override
+	public boolean isdelete(int id) {
+		
+		return doctorRepo.isdelete(id);
+	}
+
 	
 
 	

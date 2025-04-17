@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -60,7 +63,7 @@ public class patientsRepositoryImpl implements patientsRepository{
 				pmp.setEmail(rs.getString("Email"));
 				pmp.setMobailenumber(rs.getString("mobailenumber"));
 				pmp.setWpnumber(rs.getString("wpnumber"));
-				pmp.setAddress(rs.getString("Adress"));
+				pmp.setAddress(rs.getString("Address"));
 				return pmp;
 				
 			}
@@ -74,7 +77,7 @@ public class patientsRepositoryImpl implements patientsRepository{
 
 	public boolean updatePatientById(int id, Patients patients) {
 	    int value = jdbctemplate.update(
-	    		"UPDATE Patients SET Name = ?, Dob = ?, gender = ?, Maritalstaus = ?, email = ?,mobailenumber = ?, wpnumber = ?, Adress = ? WHERE patient_id = ?",
+	    		"UPDATE Patients SET Name = ?, Dob = ?, gender = ?, Maritalstaus = ?, email = ?,mobailenumber = ?, wpnumber = ?, Address = ? WHERE patient_id = ?",
 
 	        new PreparedStatementSetter() {
 	            @Override
@@ -116,7 +119,7 @@ public class patientsRepositoryImpl implements patientsRepository{
 		            patient.setEmail(rs.getString("email"));
 		            patient.setMobailenumber(rs.getString("mobailenumber")); 
 		            patient.setWpnumber(rs.getString("wpnumber"));
-		            patient.setAddress(rs.getString("Adress"));
+		            patient.setAddress(rs.getString("Address"));
 		            return patient;
 			}});
 	}
@@ -128,6 +131,19 @@ public class patientsRepositoryImpl implements patientsRepository{
 		return value>0?true:false;
 	}
 
+
+
+	@Override
+	public Optional<Map<String, Object>> findByNameAndMobile(String name, String mobile) {
+		
+		String sql = "SELECT * FROM Patients WHERE Name = ? AND mobailenumber = ?";
+        try {
+            Map<String, Object> patient = jdbctemplate.queryForMap(sql, name, mobile);
+            return Optional.of(patient);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
+	}
 
 
 

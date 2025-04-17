@@ -4,8 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -81,9 +84,32 @@ public class DoctorRepositoryImpl implements DoctorRepository{
 		
 		
 		return value>0?true:false;
-
-		
 	}
+
+	@Override
+	public boolean isdelete(int id) {
+		
+		String sql="delete from doctors where doctor_id =?";
+		int value=jdbcTemplate.update(sql, id);
+		return value>0?true:false;
+	}
+
+	@Override
+	public Optional<Map<String, Object>> findByNameAndContact(String name, String contact) {
+		
+		 String sql = "SELECT * FROM doctors WHERE name = ? AND contact = ?";
+	        try {
+	            Map<String, Object> doctor = jdbcTemplate.queryForMap(sql, name, contact);
+	            return Optional.of(doctor);
+	        } catch (EmptyResultDataAccessException e) {
+	            return Optional.empty();
+	        }
+	    }
+	
+
+	
+	
+	
 		
 
 }
