@@ -21,7 +21,6 @@ import com.techhub.hms.Services.patientsService;
 
 @CrossOrigin(origins="http://localhost:5173")
 @RestController
-
 public class PatientsController {
 	
 	@Autowired

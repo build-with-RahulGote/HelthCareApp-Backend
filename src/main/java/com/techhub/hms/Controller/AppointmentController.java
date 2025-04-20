@@ -20,7 +20,6 @@ import com.techhub.hms.Services.AppointmentService;
 
 @CrossOrigin(origins="http://localhost:5173")
 @RestController
-@RequestMapping("/hms")
 public class AppointmentController {
 	@Autowired
 	AppointmentService AppointmentS;
@@ -52,41 +51,9 @@ public class AppointmentController {
 			   throw new patientsNotFoundException("Data Not Avilable in Database");
 			}
 		
-	}
 	
 	
-	@PutMapping("update/{id}")
-    public String updateAppointment(@PathVariable int id,@RequestBody Appointment appointment)
-    {
-   	 boolean isupdate=AppointmentS.isupdate(id, appointment);
-		return isupdate?"Appointment updated successfully!" : "Appointments update failed!";
-   	 
-    }
 	
-	@GetMapping("searchpatientsByName/{patients}")
-	public ResponseEntity<List<Appointment>> searchAppointmentByName(@PathVariable("patients") String patients) {
-	 System.out.println("Patient name:"+""+patients);
-	    List<Appointment> list = AppointmentS.SearchAppointment(patients);
-
-	    if (!list.isEmpty()) {
-	        return ResponseEntity.ok(list);
-	    } else {
-	        throw new patientsNotFoundException("Appointment with name '" + patients + "' not found in the database.");
-	    }
-	}
 	
-	@GetMapping("/deleteById/{id}")
-	public String deleteAppointmentid(@PathVariable("id") Integer id )
-	{
-		boolean b=AppointmentS.isDeleteAppointment(id);
-		if(b)
-		{
-			return "Appointment Deleted";
-		}
-		else
-		{
-			throw new patientsNotFoundException("Appointment not Found using:"+" "+id);
-		}
-		
 	}
 }

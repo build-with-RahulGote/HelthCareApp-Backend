@@ -19,7 +19,6 @@ import com.techhub.hms.Services.doctorServices;
 
 @CrossOrigin(origins="http://localhost:5173")
 @RestController
-@RequestMapping("/hms")
 public class DoctorController {
 	@Autowired
 	doctorServices doctorserv;
