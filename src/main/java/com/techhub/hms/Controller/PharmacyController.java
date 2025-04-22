@@ -21,7 +21,6 @@ import com.techhub.hms.Services.PharmacyService;
 
 @CrossOrigin(origins="http://localhost:5173")
 @RestController
-@RequestMapping("/hms")
 public class PharmacyController {
 	@Autowired
 	PharmacyService  PharmacyS;

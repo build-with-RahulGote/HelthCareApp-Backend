@@ -53,50 +53,8 @@ public class AppointmentRepositoryimp implements AppointmentRepo{
 			}});
 		return list;
 	}
-	@Override
-	public boolean isupdate(int id, Appointment appointment) {
-	    int value = jdbctemplate.update(
-	        "UPDATE Appointments SET patient_id = ?, doctor_id = ?, Appointment_date = ?, time = ?, Status = ? WHERE appointment_id = ?",
-	        new PreparedStatementSetter() {
-	            @Override
-	            public void setValues(PreparedStatement ps) throws SQLException {
-	                ps.setInt(1, appointment.getPatient_id());
-	                ps.setInt(2, appointment.getDoctor_id());
-	                ps.setDate(3, appointment.getAppointment_date());
-	                ps.setString(4, appointment.getTime());
-	                ps.setString(5, appointment.getStatus());
-	                ps.setInt(6, id);
-	            }
-	        }
-	    );
 
-	    return value > 0 ? true : false;
-	}
 
-	@Override
-	public List<Appointment> SearchAppointment(String name) {
-		String sql = "select a.appointment_id, a.patient_id, a.doctor_id,a.Appointment_date,a.time,a.Status from Appointments a left join patients p on p.patient_id=a.patient_id where p.name like ?";
-
-	    return jdbctemplate.query(sql, new Object[]{"%" + name + "%"}, new RowMapper<Appointment>() {
-	        @Override
-	        public Appointment mapRow(ResultSet rs, int rowNum) throws SQLException {
-	        	Appointment Ap=new Appointment();
-	        	Ap.setAppointment_id(rs.getInt("appointment_id"));
-				Ap.setPatient_id(rs.getInt("patient_id"));
-				Ap.setDoctor_id(rs.getInt("doctor_id"));
-				Ap.setAppointment_date(rs.getDate("Appointment_date"));
-				Ap.setTime(rs.getString("time"));
-				Ap.setStatus(rs.getString("Status"));
-	            return Ap;
-	        }
-	    });
-	}
-	@Override
-	public boolean isDeleteAppointment(int id) {
-		String sql="delete from Appointments where appointment_id =?";
-		int value=jdbctemplate.update(sql, id);
-		return value>0?true:false;
-	}
 	
 	
 }

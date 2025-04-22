@@ -21,7 +21,6 @@ import com.techhub.hms.Services.ReceptionistService;
 
 @CrossOrigin(origins="http://localhost:5173")
 @RestController
-
 public class ReceptionistrepControler {
 	@Autowired
 	ReceptionistService receptionists;
