@@ -26,5 +26,4 @@ public class AppointmentServiceimp implements AppointmentService{
 	}
 
 
-
 }

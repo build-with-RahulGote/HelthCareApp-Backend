@@ -51,8 +51,11 @@ public class AppointmentController {
 			   throw new patientsNotFoundException("Data Not Avilable in Database");
 			}
 		
+	
+	
+	
+
+	
 	}
-	
-	
-	
+
 }

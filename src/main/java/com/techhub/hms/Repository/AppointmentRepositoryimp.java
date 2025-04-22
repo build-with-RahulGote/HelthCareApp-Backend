@@ -54,7 +54,6 @@ public class AppointmentRepositoryimp implements AppointmentRepo{
 		return list;
 	}
 
-
 	
 	
 }
