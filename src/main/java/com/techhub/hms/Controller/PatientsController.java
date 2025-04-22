@@ -44,9 +44,14 @@ public class PatientsController {
 	@GetMapping("/getAllPatients")
 	public List<Patients>showPatients()
 	{
+	
 		 List<Patients>list=patientsserv.getAllPatients();
 			if(list.size()!=0)
 			{
+				 for (Patients p : list) {
+				        System.out.println("DOB of patient " + p.getName() + ": " + p.getDob());
+				    }
+
 				return list;
 			}
 			else
