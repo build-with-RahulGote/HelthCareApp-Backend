@@ -11,5 +11,6 @@ private String  symptoms;
 private String medicine;
 private String tests_suggested;
 private int patient_id;
+private double total_bill;
 
 }
