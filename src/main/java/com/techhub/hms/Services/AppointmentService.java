@@ -7,6 +7,7 @@ import com.techhub.hms.Models.Appointment;
 public interface AppointmentService {
 	public boolean isAddAppointment(Appointment appointment);
 	public List<Appointment> getAllAppointment();
-	
+	public boolean isupdate(int id, Appointment appointment);
+
 
 }
