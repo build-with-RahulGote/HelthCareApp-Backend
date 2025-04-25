@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.techhub.hms.Exception.patientsNotFoundException;
 import com.techhub.hms.Models.Appointment;
+import com.techhub.hms.Models.Doctor;
 import com.techhub.hms.Models.Patients;
 import com.techhub.hms.Services.AppointmentService;
 
@@ -50,12 +51,15 @@ public class AppointmentController {
 			{
 			   throw new patientsNotFoundException("Data Not Avilable in Database");
 			}
-		
-	
-	
-	
-
 	
 	}
+	@PutMapping("updateAppointments/{id}")
+    public String updateAppointment(@PathVariable int id,@RequestBody Appointment appointment)
+    {
+   	 boolean isupdate=AppointmentS.isupdate(id, appointment);
+		return isupdate?"Appointment updated successfully!" : "Appointment update failed!";
+   	 
+    }
+	
 
 }

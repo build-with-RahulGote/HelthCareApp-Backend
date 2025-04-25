@@ -53,6 +53,23 @@ public class AppointmentRepositoryimp implements AppointmentRepo{
 			}});
 		return list;
 	}
+	@Override
+	public boolean isupdate(int id, Appointment appointment) {
+	    int value = jdbctemplate.update("UPDATE appointments SET patient_id = ?, doctor_id = ?, appointment_date = ?, time = ?, status = ? WHERE appointment_id = ?",
+	        new PreparedStatementSetter() {
+	            @Override
+	            public void setValues(PreparedStatement ps) throws SQLException {
+	                ps.setInt(1, appointment.getPatient_id());        // Set patient_id
+	                ps.setInt(2, appointment.getDoctor_id());         // Set doctor_id
+	                ps.setDate(3, appointment.getAppointment_date()); // Set appointment_date
+	                ps.setString(4, appointment.getTime());           // Set time
+	                ps.setString(5, appointment.getStatus());         // Set status
+	                ps.setInt(6, id);                                 // Set appointment_id (id passed from method)
+	            }
+	        });
+	    return value > 0?true:false; // return true if update was successful
+	}
+
 
 	
 	

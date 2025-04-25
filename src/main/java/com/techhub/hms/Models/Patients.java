@@ -11,7 +11,6 @@ public class Patients {
 	private int patientId;
 	private String name;
 	private String gender;
-
 	private Date dob;
 	private String maritalstatus;
 	private String address;

@@ -25,5 +25,11 @@ public class AppointmentServiceimp implements AppointmentService{
 		return appointmentrepo.getAllAppointment();
 	}
 
+	@Override
+	public boolean isupdate(int id, Appointment appointment) {
+		// TODO Auto-generated method stub
+		return appointmentrepo.isupdate(id, appointment);
+	}
+
 
 }
