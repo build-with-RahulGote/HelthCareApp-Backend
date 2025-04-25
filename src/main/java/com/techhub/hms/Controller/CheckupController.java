@@ -40,5 +40,8 @@ public class CheckupController {
 	    List<Checkup> details = checkupService.getCheckupDetailsByPatientId(patientId);
 	    return ResponseEntity.ok(details);
 	}
+	
+	
+	
 }
 
