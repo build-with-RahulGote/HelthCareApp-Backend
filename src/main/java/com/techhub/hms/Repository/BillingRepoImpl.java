@@ -71,4 +71,49 @@ public class BillingRepoImpl implements BillingRepo{
 	        return bill;
 	    });
 	}
+
+	@Override
+	public List<Billing> getAllBillsWithPatientName() {
+		String sql = "SELECT b.bill_id, b.patient_id, p.name AS patient_name, " +
+                "b.total_amount, b.payment_status, b.payment_mode " +
+                "FROM billing b " +
+                "JOIN patients p ON b.patient_id = p.patient_id";
+		return jdbctemplate.query(sql, (rs, rowNum) -> {
+	        Billing  bill = new Billing();
+	        bill.setBill_id(rs.getInt("bill_id"));
+	        bill.setPatients_id(rs.getInt("patient_id"));
+	        bill.setPatientName(rs.getString("patient_name"));
+	        bill.setTotal_amount(rs.getDouble("total_amount"));
+	        bill.setPayment_Status(rs.getString("payment_Status"));
+	        bill.setPayment_mode(rs.getString("payment_mode"));
+	        return bill;
+	    });
+		
+	}
+
+	@Override
+	public int updatePaymentMode(int billId, String paymentMode) {
+		String sql = "UPDATE Billing SET payment_mode = ?, payment_status = 'Paid' WHERE bill_id = ?";
+	    return jdbctemplate.update(sql, paymentMode, billId);
+		
+	}
+
+	@Override
+	public Billing getBillById(int id) {
+		String sql = """
+		        SELECT b.bill_id, b.total_amount, b.payment_status, b.payment_mode, p.Name 
+		        FROM Billing b 
+		        JOIN patients p ON b.patient_id = p.patient_id 
+		        WHERE b.bill_id = ?
+		        """;
+		return jdbctemplate.queryForObject(sql, new Object[]{id}, (rs, rowNum) -> {
+	        Billing bill = new Billing();
+	        bill.setBill_id(rs.getInt("bill_id"));
+	        bill.setTotal_amount(rs.getDouble("total_amount"));
+	        bill.setPayment_Status(rs.getString("payment_status"));
+	        bill.setPayment_mode(rs.getString("payment_mode"));
+	        bill.setPatientName(rs.getString("Name")); 
+	        return bill;
+	    });
+	}
 }

@@ -31,4 +31,22 @@ public class BillingServiceImpl implements BillingService {
 		
 		return billingrepo.getallbillsById(patients_id);
 	}
+
+	@Override
+	public List<Billing> getAllBillsWithPatientName() {
+		
+		return billingrepo.getAllBillsWithPatientName();
+	}
+
+	@Override
+	public int updatePaymentMode(int billId, String paymentMode) {
+		
+		return billingrepo.updatePaymentMode(billId, paymentMode);
+	}
+
+	@Override
+	public Billing getBillById(int id) {
+		
+		return billingrepo.getBillById(id);
+	}
 }

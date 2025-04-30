@@ -11,5 +11,6 @@ public class Billing {
 	private double total_amount;
 	private String payment_Status;
 	private String payment_mode;
+	 private String patientName;
 
 }
