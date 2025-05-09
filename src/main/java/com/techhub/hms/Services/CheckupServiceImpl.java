@@ -25,4 +25,10 @@ public class CheckupServiceImpl implements CheckupService {
 		
 		return CheckRepo.getCheckupDetailsByPatientId(patientsId);
 	}
+
+	@Override
+	public List<Checkup> getAllPrecription() {
+		
+		return CheckRepo.getAllPrecription();
+	}
 }

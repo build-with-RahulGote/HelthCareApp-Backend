@@ -7,4 +7,6 @@ import com.techhub.hms.Models.Checkup;
 public interface CheckupRepo {
 	public boolean isAddPrecription(Checkup checkup);
 	public List<Checkup>getCheckupDetailsByPatientId(int patientsId);
+	public List<Checkup> getAllPrecription();
+
 }
