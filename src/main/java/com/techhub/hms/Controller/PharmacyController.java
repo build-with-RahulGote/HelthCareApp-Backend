@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techhub.hms.Exception.patientsNotFoundException;
-import com.techhub.hms.Models.Patients;
+import com.techhub.hms.Models.MedicalCertificate;
 import com.techhub.hms.Models.Pharmacy;
 import com.techhub.hms.Services.PharmacyService;
 
@@ -76,4 +76,27 @@ public class PharmacyController {
 		}
 		
 	}
+	
+	
+	@PostMapping("/CreateMediCerti")
+	public String isAddMedicaleCertificate(@RequestBody MedicalCertificate medi) {
+		boolean b=PharmacyS.isAddMedicaleCertificate(medi);
+		if(b) {
+			return "Certificate Add Sucessfully";
+		}else {
+			return "Certificate Not Added";
+		}
+	}
+	
+	@GetMapping("/ViewCertificates")
+	public List<MedicalCertificate> getAllCertificates(){
+		List<MedicalCertificate> list=PharmacyS.getCertificate();
+		if(list.size()!=0) {
+			return list;
+			
+		}else {
+			throw new patientsNotFoundException("Data Not Avilable in Database");
+		}
+	}
+	
 }
